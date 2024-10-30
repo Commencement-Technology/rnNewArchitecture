@@ -25,37 +25,23 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import NativeDeviceInfo from './specs/NativeDeviceInfo';
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
+const EMPTY = '<empty>';
 function App(): React.JSX.Element {
+  const [batteryState, setBatteryState] = React.useState<string | null>(null);
+  const [deviceModel, setDeviceModel] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    try {
+      const nativeBatteryValue = NativeDeviceInfo?.getBatteryState();
+      // const nativeDeviceModel = NativeDeviceInfo?.getDeviceModule();
+      setBatteryState(nativeBatteryValue);
+      // setDeviceModel(nativeDeviceModel);
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -68,30 +54,10 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+      <Text style={styles.sectionTitle}>Battery State</Text>
+      <Text style={styles.sectionDescription}>{batteryState ?? EMPTY}</Text>
+      <Text style={styles.sectionTitle}>Device Model</Text>
+      <Text style={styles.sectionDescription}>{deviceModel ?? EMPTY}</Text>
     </SafeAreaView>
   );
 }
