@@ -7,42 +7,49 @@
 
 #import "RCTNativeDeviceInfoTest.h"
 
-// Interface declaration for RCTNativeDeviceInfoTest
+// Interface declaration - can be used to declare private properties and methods
 @interface RCTNativeDeviceInfoTest()
 @end
 
 // Implementation of RCTNativeDeviceInfoTest
 @implementation RCTNativeDeviceInfoTest
 
-// Macro to export the module to React Native
+// Register this class as a native module with React Native
+// The name 'NativeDeviceInfoTest' will be used to reference this module in JavaScript
 RCT_EXPORT_MODULE(NativeDeviceInfoTest)
 
-// Initializer method
+// Initialize the module
+// This is called when the module is first created
 - (instancetype)init {
   self = [super init];
   if (self) {
-    // Initialize any properties or perform setup tasks here
+    // Any initialization code would go here
+    // Currently empty as we don't need special initialization
   }
   return self;
 }
 
-// Method to get the battery state as a string
+// Get the current battery level as a percentage
+// Returns: String representation of battery level (0-100)
 - (NSString *)getBatteryState {
-  UIDevice *device = [UIDevice currentDevice]; // Get the current device
-  device.batteryMonitoringEnabled = YES; // Enable battery monitoring
+  UIDevice *device = [UIDevice currentDevice];
+  device.batteryMonitoringEnabled = YES;  // Must be enabled to get battery info
   
-  int state = [device batteryState]; // Get the battery state
-  double batLeft = (float)[device batteryLevel] * 100; // Calculate battery level percentage
+  int state = [device batteryState];      // Get current battery state (charging/unplugged/full)
+  double batLeft = (float)[device batteryLevel] * 100;  // Convert battery level to percentage
 
-  return [NSString stringWithFormat:@"%f", batLeft]; // Return battery level as a string
+  return [NSString stringWithFormat:@"%f", batLeft];
 }
 
-// Method to get the device model and system version
+// Get device model and iOS version information
+// Returns: String in format "<device type> <iOS version>"
 - (NSString *)getDeviceModule {
-  UIDevice *device = [UIDevice currentDevice]; // Get the current device
-  NSString *deviceModel = device.model; // Get the device model
+  UIDevice *device = [UIDevice currentDevice];
+  NSString *deviceModel = device.model;  // Get device type (iPhone/iPad/iPod)
   
-  // Append system version to the device model
+  // Append iOS version to device model
+  // Note: This could be simplified since all cases do the same thing,
+  // but keeping the structure for potential future device-specific handling
   if ([deviceModel isEqualToString:@"iPhone"]) {
     deviceModel = [NSString stringWithFormat:@"%@ %@", deviceModel, device.systemVersion];
   } else if ([deviceModel isEqualToString:@"iPad"]) {
@@ -52,12 +59,13 @@ RCT_EXPORT_MODULE(NativeDeviceInfoTest)
   } else {
     deviceModel = [NSString stringWithFormat:@"%@ %@", deviceModel, device.systemVersion];
   }
-  return deviceModel; // Return the device model with system version
+  return deviceModel;
 }
 
-// Method to get a TurboModule instance
+// Required for New Architecture (TurboModules)
+// Creates and returns a C++ TurboModule instance for this native module
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const facebook::react::ObjCTurboModule::InitParams &)params {
-  return std::make_shared<facebook::react::NativeDeviceInfoTestSpecJSI>(params); // Return a shared pointer to a TurboModule
+  return std::make_shared<facebook::react::NativeDeviceInfoTestSpecJSI>(params);
 }
 
 @end
