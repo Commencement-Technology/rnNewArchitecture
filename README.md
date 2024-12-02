@@ -17,9 +17,14 @@ This repository demonstrates how to create a custom Turbo Module in React Native
 - Basic understanding of Kotlin (for Android implementation)
 
 ## Screenshots
+### android:
+![App Preview in Android](./screenshots/newArchitecture_android_rn.gif)
 
-![Ios](./screenshots/newArchitecture_ios.png)
-![Android](./newArchitecture_android_rn.gif)
+
+### IOS:
+
+![App Preview in Ios](./screenshots/newArchitecture_ios.png)
+
 
 
 
