@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "codegenConfig": {
-    "name": "NativeDeviceInfoSpec",
+    "name": "NativeDeviceInfoTestSpec",
     "type": "modules",
     "jsSrcsDir": "specs",
     "android": {

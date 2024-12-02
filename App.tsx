@@ -6,26 +6,17 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
-  View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import NativeDeviceInfo from './specs/NativeDeviceInfo';
+import NativeDeviceInfoTest from './specs/NativeDeviceInfoTest';
 
 const EMPTY = '<empty>';
 function App(): React.JSX.Element {
@@ -34,10 +25,13 @@ function App(): React.JSX.Element {
 
   React.useEffect(() => {
     try {
-      const nativeBatteryValue = NativeDeviceInfo?.getBatteryState();
-      // const nativeDeviceModel = NativeDeviceInfo?.getDeviceModule();
+      const nativeBatteryValue =
+        NativeDeviceInfoTest?.getBatteryState() ?? EMPTY;
+      const nativeDeviceModel =
+        NativeDeviceInfoTest?.getDeviceModule() ?? EMPTY;
+
       setBatteryState(nativeBatteryValue);
-      // setDeviceModel(nativeDeviceModel);
+      setDeviceModel(nativeDeviceModel);
     } catch (e) {
       console.error(e);
     }
