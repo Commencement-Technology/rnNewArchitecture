@@ -16,20 +16,12 @@ This repository demonstrates how to create a custom Turbo Module in React Native
 - Android Studio for native module development
 - Basic understanding of Kotlin (for Android implementation)
 
-## 🛠 Project Structure
+## Screenshots
 
-```
-project-root/
-├── android/
-│   └── app/
-│       └── src/
-│           └── main/
-│               └── kotlin/
-│                   └── NativeDeviceInfoTestModule.kt
-├── src/
-│   └── NativeDeviceInfo.ts
-└── README.md
-```
+![Ios](./screenshots/newArchitecture_ios.png)
+![Android](./newArchitecture_android_rn.gif)
+
+
 
 ## 💡 Implementation Details
 
@@ -88,4 +80,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - [React Native Official Documentation](https://reactnative.dev/docs/the-new-architecture/pillars-turbomodules)
 - [Turbo Modules Documentation](https://reactnative.dev/docs/the-new-architecture/pillars-turbomodules)
-- [Your Tutorial Article Link]
+- Check here [CasaInnov](https://casainnov.com/) if you need experts in React Native
+- [ Create a Native Module article]( https://medium.com/@malikchohra/build-for-scale-create-native-android-and-ios-module-in-react-native-prepare-react-native-app-09d615ba2450
+)
+- [What is new in React Native 0.76](https://casainnov.com/react-native-076-and-the-new-architecture-why-is-the-most-exciting-release-yet)
